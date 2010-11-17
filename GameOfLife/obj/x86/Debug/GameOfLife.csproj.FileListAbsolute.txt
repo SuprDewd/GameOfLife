@@ -1,0 +1,9 @@
+c:\users\suprdewd\Desktop\Projects\Forritun\GameOfLife\GameOfLife\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\suprdewd\Desktop\Projects\Forritun\GameOfLife\GameOfLife\bin\Debug\GameOfLife.exe
+c:\users\suprdewd\Desktop\Projects\Forritun\GameOfLife\GameOfLife\bin\Debug\GameOfLife.pdb
+c:\users\suprdewd\Desktop\Projects\Forritun\GameOfLife\GameOfLife\obj\x86\Debug\GameOfLife.exe
+c:\users\suprdewd\Desktop\Projects\Forritun\GameOfLife\GameOfLife\obj\x86\Debug\GameOfLife.pdb
+c:\users\suprdewd\Desktop\Projects\Forritun\GameOfLife\GameOfLife\bin\Debug\SharpBag.dll
+c:\users\suprdewd\Desktop\Projects\Forritun\GameOfLife\GameOfLife\bin\Debug\MySql.Data.dll
+c:\users\suprdewd\Desktop\Projects\Forritun\GameOfLife\GameOfLife\bin\Debug\SharpBag.pdb
+c:\users\suprdewd\Desktop\Projects\Forritun\GameOfLife\GameOfLife\bin\Debug\Board.txt
