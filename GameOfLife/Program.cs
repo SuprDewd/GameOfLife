@@ -11,24 +11,30 @@ namespace GameOfLife
     {
         static int WidthM1;
         static int HeightM1;
+
+        static int Width;
+        static int Height;
         
         static bool[,] Board;
         static bool[,] TempBoard;
 
-        static int MeasureGenerations = 23;
+        static int MeasureGenerations = 0;
 
         static void Main(string[] args)
         {
-            Action createBoard = () =>
-            {
-                //ReadBoardFromFile("Board.txt");
-                GenerateRandomBoard(300, 300, 50);
-            };
+            //Console.SetBufferSize(310, 310);
 
-            createBoard();
+            //ReadBoardFromFile("Board.txt");
+            //GenerateRandomBoard(300, 300, 5);
+            GenerateRandomBoard(60, 20, 45);
 
-            WidthM1 = Board.GetLength(0) - 1;
-            HeightM1 = Board.GetLength(1) - 1;
+            Width = Board.GetLength(0);
+            Height = Board.GetLength(1);
+
+            WidthM1 = Width - 1;
+            HeightM1 = Height - 1;
+
+            LastBoard = new bool[Width, Height];
 
             if (MeasureGenerations > 0)
             {
@@ -61,12 +67,15 @@ namespace GameOfLife
             }
             else while (true)
             {
-                Draw();
+                //Draw();
+                IntelligentDraw();
                 Compute();
                 if (Console.ReadLine().StartsWith("q"))
                 {
                     return;
                 }
+
+                //Thread.Sleep(30);
             }
         }
 
@@ -88,9 +97,9 @@ namespace GameOfLife
         static void ReadBoardFromFile(string file)
         {
             bool[][] lines = (from l in Utils.ReadLinesFromFile(file)
-                              let line = l.Replace("#", "")
+                              let line = l//.Replace("#", "")
                               where line.Length != 0
-                              select line.ToCharArray().Select(c => c != ' ').ToArray()).ToArray();
+                              select line.ToCharArray().Select(c => c != '#').ToArray()).ToArray();
 
             Board = new bool[lines.Length, lines.Max(l => l.Length)];
 
@@ -141,7 +150,13 @@ namespace GameOfLife
 
         static bool Alive(int x, int y)
         {
-            if (x < 0 || y < 0 || x > WidthM1 || y > HeightM1) return false;
+            //if (x < 0 || y < 0 || x > WidthM1 || y > HeightM1) return false;
+
+            x = x % Width;
+            y = y % Height;
+
+            if (x == -1) x = WidthM1;
+            if (y == -1) y = HeightM1;
 
             return Board[x, y];
         }
@@ -160,6 +175,30 @@ namespace GameOfLife
 
                 Console.WriteLine();
             }
+        }
+
+        static bool[,] LastBoard = null;
+
+        static void IntelligentDraw()
+        {
+            for (int x = 0; x <= WidthM1; x++)
+            {
+                for (int y = 0; y <= HeightM1; y++)
+                {
+                    bool now = Board[x, y];
+
+                    if (LastBoard[x, y] != now)
+                    {
+                        Console.SetCursorPosition(y, x);
+                        if (now) Console.Write("#");
+                        else Console.Write(" ");
+                    }
+                }
+            }
+
+
+            Console.SetCursorPosition(0, WidthM1 + 2);
+            LastBoard = (bool[,])Board.Clone();
         }
     }
 }
